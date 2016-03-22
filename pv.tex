@@ -1,0 +1,130 @@
+\documentclass[letterpaper,10pt]{report}
+\usepackage{array}						% For tables
+\usepackage[french]{babel}					% French Dictionnary
+\usepackage{color}
+\usepackage{etoolbox}						% For boolean logic
+\usepackage[T1]{fontenc}					% Font Encoding
+\usepackage{graphicx}						% Pour les images
+\usepackage{ifpdf}						% IfPDF
+\usepackage[utf8]{inputenc}					% Input Encoding
+\usepackage{lmodern}
+\usepackage{longtable}						% For LONG tables
+\usepackage{ltxtable}						% For Long TabularX Tables
+\usepackage[margin=1.25cm]{geometry}				% Set thin margins
+\usepackage{pbox}
+\usepackage{soulutf8}
+\usepackage{substr}
+\usepackage{tabularx}						% For auto-adjusting tables
+\usepackage{textgreek}						% For greek letters in text mode
+\usepackage{titlesec}						% Titles reformatting
+\usepackage{titling}						% Accessing title page values
+\usepackage{ulem}						% For Underlining and Strikeout
+\usepackage{xparse}
+
+\ifpdf
+	% PDFLaTeX needs support for EPS graphics
+	\usepackage{epstopdf}
+	\epstopdfsetup{update}
+	% PDFLaTeX, can support HyperRef
+	\usepackage{hyperref}					% URLs dans la TOC
+	\hypersetup{
+		colorlinks,
+		citecolor=black,
+		filecolor=black,
+		linkcolor=black,
+		urlcolor=black
+	}
+% 	\usepackage[plain]{fancyref}				% URLs dans le document
+\else
+	% LaTeX No need for EPSToPDF
+	% LaTeX Hyperref fails for some odd reason...
+\fi
+
+%%%
+% Instance du PV
+%%%
+\include{config}
+\include{fonctions} % FEUS-Specific functions
+% Test if CA
+\newbool{ca}
+\IfBeforeSubStringEmpty{CA}{\instance}{\booltrue{ca}}{\IfBeforeSubStringEmpty{AG}{\instance}{\booltrue{ca}}{\boolfalse{ca}}}
+\include{membres} % Member list
+
+\makeatletter
+\setlength{\parindent}{\z@}
+\makeatother
+
+\setcounter{tocdepth}{2}
+
+\title{Procès Verbal\\\cm*\\\session\ - \instance\theinstance\ - FEUS\\~
+\\(\theinstance\textsuperscript{e} séance, \thesession\textsuperscript{e} session, \theannee\textsuperscript{e} année financière de la FEUS)}
+\preauthor{\begin{center}\includegraphics[width=0.5\textwidth]{LogoFEUS2015_vert_seul.eps}~\\[1cm]}
+\author{}
+\postauthor{\end{center}}
+
+\makeatletter
+\addto\captionsfrench{
+\renewcommand{\contentsname}{\uppercase{Ordre du Jour}}
+}
+\makeatother
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\clearpage
+\par{PROCÈS VERBAL de  la \instanceaulong~(\theinstance\textsuperscript{re}) séance du \cm\ de la \sessionaulong~(\thesession\textsuperscript{e}) session de la \anneeaulong~(\theannee\textsuperscript{e}) année financière de la FEUS qui a eu lieu le \jour\ \thedate\ à \heure\ au local \local\ de la \fmss\ de l’\udes.}
+
+\begin{longtable}{@{}l  l}
+\titrepresence{Présences au \instance}
+% ADEEP
+\presence{\iADEEP}{ADEEP}
+\saut
+% AEFA
+\presence{\iAEFA}{AEFA}
+\saut
+% AGED
+\presence{\iAGED}{AGED}
+\saut
+% AGEEFEUS
+\presence{\iAGEEFEUS}{AGEEFEUS}
+\saut
+% AGEEMUS
+\presence{\iAGEEMUS}{AGEEMUS}
+\saut
+% AGEFLESH
+\presence{\iAGEFLESH}{AGEFLESH}
+\saut
+% AGEG
+\presence{\iAGEG}{AGEG}
+\saut
+% AGER
+\presence{\iAGER}{AGER}
+\saut
+% AGES
+\presence{\iAGES}{AGES}
+\saut
+% FEUS
+\presence{\iFEUS}{FEUS}
+
+\saut
+\titrepresence{Pr{\AE}sidium}
+\presence{\textxeta}{Présidence d'assemblée}
+\presence{\textxi}{Secrétariat d'Assemblée}
+\saut
+\titrepresence{Observateurs}
+\saut
+\titrepresence{Absences}
+\presence{Aucun délégué}{\textPhi}
+\end{longtable}
+\resetAssoCounters
+
+\clearpage
+\setcounter{interventions}{0}
+\setcounter{interventionsh}{0}
+\setcounter{interventionsf}{0}
+
+\LTXtable{\textwidth}{ltxt}
+\signatures{\textPsi}{\textOmega}
+\include{stats}
+\end{document}

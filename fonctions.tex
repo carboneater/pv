@@ -1,0 +1,316 @@
+\usepackage{xparse}
+%%%
+% Fonctions pour le bon fonctionnement de la FEUS
+%%%
+
+\newcounter{annexe}
+\newcounter{point}
+\newcounter{subpoint}[point]
+\newcounter{subsubpoint}[subpoint]
+\newcounter{subsubsubpoint}[subsubpoint]
+
+%%%
+% Macros de postes FEUS
+%%%
+\NewDocumentCommand{\ractivite}{s}{\IfBooleanTF{#1}{Responsable aux activités étudiantes}{responsable aux activités étudiantes}}
+\NewDocumentCommand{\ranp}{s}{\IfBooleanTF{#1}{Responsable aux affaires nationales et politiques}{responsable aux affaires nationales et politiques}}
+\NewDocumentCommand{\raur}{s}{\IfBooleanTF{#1}{Responsable aux affaires universitaires et à la recherche}{responsable aux affaires universitaires et à la recherche}}
+\NewDocumentCommand{\rcede}{s}{\IfBooleanTF{#1}{Responsable à la condition étudiante et aux droits des étudiants}{responsable à la condition étudiante et aux droits des étudiants}}
+\NewDocumentCommand{\rddalc}{s}{\IfBooleanTF{#1}{Responsable au développement durable et aux affaires locales et communautaires}{responsable au développement durable et aux affaires locales et \allowbreak communautaires}}
+\NewDocumentCommand{\rexec}{s}{\IfBooleanTF{#1}{Responsable à l'exécutif}{responsable à l'exécutif}}
+\NewDocumentCommand{\rexterne}{s}{\IfBooleanTF{#1}{Responsable aux affaires externes}{responsable aux affaires externes}}
+\NewDocumentCommand{\rrc}{s}{\IfBooleanTF{#1}{Responsable aux relations et communications}{responsable aux relations et communications}}
+\NewDocumentCommand{\rsg}{s}{\IfBooleanTF{#1}{Responsable au secrétariat général}{responsable au secrétariat général}}
+\NewDocumentCommand{\preza}{s}{\IfBooleanTF{#1}{présidente d'assemblée}{président d'assemblée}}
+\newcommand{\seca}{secrétaire d'assemblée}
+%%%
+% Macros d'adoptions communs
+%%%
+\newcommand{\aam}{L'amendement est adopté à majorité.}
+\newcommand{\aau}{L'amendement est adopté à l'unanimité.}
+\newcommand{\aaua}{L'amendement est adopté à l'unanimité, avec abstentions.}
+\newcommand{\abam}{L'amendement est battu à majorité.}
+\newcommand{\pam}{La proposition est adoptée à majorité.}
+\newcommand{\pau}{La proposition est adoptée à l'unanimité.}
+\newcommand{\paua}{La proposition est adoptée à l'unanimité, avec abstentions.}
+\newcommand{\pbam}{La proposition est battue à majorité.}
+\newcommand{\qpau}{La question préalable passe à l'unanimité.}
+\newcommand{\qpam}{La question préalable passe aux deux tiers.}
+
+%%%
+% Macros d'élections
+%%%
+%\NewDocumentCommand{\election
+
+%%%
+% Macros d'instances FEUS
+%%%
+\NewDocumentCommand{\ag}{s}{\IfBooleanTF{#1}{Assemblée générale}{assemblée générale}}
+\NewDocumentCommand{\ca}{s}{\IfBooleanTF{#1}{Conseil d'administration}{conseil d'administration}}
+\NewDocumentCommand{\cac}{s}{\IfBooleanTF{#1}{Comité d'étude des affaires des campi}{comité d'étude des affaires des campi}}
+\NewDocumentCommand{\cae}{s}{\IfBooleanTF{#1}{Comité d'étude des affaires externes}{comité d'étude des affaires externes}}
+\NewDocumentCommand{\cm}{s}{\IfBooleanTF{#1}{Conseil des membres}{conseil des membres}}
+\NewDocumentCommand{\cs}{s}{\IfBooleanTF{#1}{Commission Spéciale}{commission spéciale}}
+
+%%%
+% Macros de texte divers
+%%%
+\newcommand{\appel}{Appel à la décision\newline du président}
+\newcommand{\cdi}{Carrefour de l'information}
+\newcommand{\cdf}{Centre de foires de Sherbrooke}
+\newcommand{\dd}{développement durable}
+\newcommand{\flsh}{Faculté des Lettres et Sciences Humaines}
+\newcommand{\fmss}{Facuté de Médecine et des Sciences de la Santé}
+\newcommand{\jrd}{Joly Riendeau \& Associé inc. CPA}
+\newcommand{\mmgs}{Melançon, Marceau, Grenier et Sciortino}
+\newcommand{\odj}{ordre du jour}
+\newcommand{\racj}{Régie des Alcools, Courses et Jeux (RACJ)}
+\newcommand{\rcgt}{Raymond Chabot Grant Thornton}
+\newcommand{\RGs}{Règlements Généraux}
+\newcommand{\sciences}{Faculté des Sciences}
+\newcommand{\sps}{Service de Police de Sherbrooke (SPS)}
+\newcommand{\sve}{Service à la Vie Étudiante (SVE)}
+\newcommand{\udes}{Université de Sherbrooke}
+
+%%%
+% Macros de style
+%%%
+\NewDocumentCommand{\amendement}{smm}{
+	\saut
+	& \ifbool{useUnderline}{\uline{Amendement~:}}{Amendement~:} & \par{\textbf{#2 \IfBooleanTF{#1}{}{Amendement appuyé par #3.}}} \\
+	\IfBooleanTF{#1}{\resultat{L'amendement tombe faute d'appui.}}{}
+}
+
+\NewDocumentCommand{\annexe}{mo}{
+	\clearpage
+	\renewcommand{\theannexe}{\theinstance.\Alph{annexe}}
+	\refstepcounter{annexe}\IfNoValueTF{#2}{}{\label{anx:#2}}
+	\addcontentsline{toc}{chapter}{\instance\ \ifbool{showYear}{\theannee.}{}\ifbool{showSession}{\thesession/}{}\theannexe \hspace{2em} #1}
+	\vspace*{\fill}
+	\begin{center}
+		\huge{ Annexe~\theannexe\\
+		#1}
+	\end{center}
+	\vspace{\fill}
+	\clearpage
+}
+
+\newcommand{\appui}[1]{
+	#1\ appuie.
+}
+
+\newcommand{\discussion}[1]{
+	& & #1 \\
+}
+
+\NewDocumentCommand{\nomination}{smmo}{
+	% * -> Flags a refused nomination
+	% #2 -> Proposer
+	% #3 -> Seconder
+	% #4 -> Additionnal flag
+	\saut
+	\procedure{#2 nomine #3\IfNoValueTF{#4}{}{ au poste de #4}.}
+	\procedure{#3 \IfBooleanTF{#1}{refuse}{accepte} la nomination\IfNoValueTF{#4}{}{ au poste de #4}.}
+}
+
+%Point
+\renewcommand{\thepoint}{\theinstance.\arabic{point}}
+\NewDocumentCommand{\point}{smo}{
+	\saut
+	\refstepcounter{point}\IfNoValueTF{#3}{}{\label{pt:#3}}
+	\instance\ \ifbool{showYear}{\theannee.}{}\ifbool{showSession}{\thesession/}{}\thepoint & \multicolumn{2}{l}{\ifbool{useUnderline}{\uline{#2}}{#2}} \\
+	\addcontentsline{toc}{chapter}{\instance\ \ifbool{showYear}{\theannee.}{}\ifbool{showSession}{\thesession/}{}\thepoint \hspace{2em} #2}
+	\IfBooleanTF{#1}{& & \textit{Point statutaire.} \\}{}
+}
+
+% Annotation de procedure
+\NewDocumentCommand{\procedure}{om}{
+% 	%%% USAGE:
+% 	% \procedure[]{}
+% 	% [] -> Privileged Procedure Indicator
+% 	% {} -> Procedure text
+	& \IfNoValueTF{#1}{}{\ifbool{useUnderline}{\uline{#1~:}}{#1~:}} & \IfNoValueTF{#1}{\textit{#2}}{\textbf{#2}} \\
+}
+
+\NewDocumentCommand{\proposition}{smm}{
+% Arguments
+% #1 -> * flag non appuyé
+% #2 -> Proposeur et libellé
+% #3 -> Appuyeur
+	\saut
+	& \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
+	\IfBooleanTF{#1}{\resultat{La proposition tombe faute d'appui.}}{}
+}
+
+\newcommand{\qp}[1]{ %Question Préalable
+	\saut
+	& \ifbool{useUnderline}{\uline{Question Préalable~:}}{Question Préalable~:} & \par{\textbf{#1 demande la question préalable.}} \\
+}
+
+\NewDocumentCommand{\resultat}{ooom}{
+% Arguments:
+% #1 Pros (Optional)
+% #2 Cons (Optional)
+% #3 Abstentions (Optional)
+% #4 Conclusion (Mandatory)
+	\saut
+	& \ifbool{useUnderline}{\uline{Résultat~:}}{Résultat~:} & \par{\IfNoValueTF{#1}{}{Pour~:~#1\newline}\IfNoValueTF{#2}{}{Contre~:~#2\newline}\IfNoValueTF{#3}{}{Abstention~:~#3\newline}\textbf{#4}} \\
+	\saut
+}
+
+\newcommand{\saut}{
+% Skips a line
+	& \\
+}
+
+\NewDocumentCommand{\sousamendement}{smm}{
+	\saut
+	& \ifbool{useUnderline}{\uline{Sous-amendement~:}}{Sous-amendement~:} & \par{\textbf{#2 \IfBooleanTF{#1}{}{Sous-amendement appuyé par #3.}}} \\
+	\IfBooleanTF{#1}{\resultat{L'amendement tombe faute d'appui.}}{}
+}
+
+% Sous point: x.y.z
+\renewcommand{\thesubpoint}{\thepoint.\arabic{subpoint}}
+\NewDocumentCommand{\souspoint}{smo}{
+  \saut
+  \hangindent=2cm
+  \refstepcounter{subpoint}\IfNoValueTF{#3}{}{\label{spt:#3}}
+  \IfBooleanTF{#1}{
+    & \multicolumn{2}{m{12cm}}{\thesubpoint\hspace{2em}#2} \\
+    & & \textit{Point statutaire.} \\
+  }{
+    & \multicolumn{2}{m{12cm}}{\thesubpoint\hspace{2em}#2} \\
+  }
+  \hangindent=0cm
+  \addcontentsline{toc}{section}{\thesubpoint\hspace{2em} #2}
+}
+
+% Sous Sous Point: x.y.z.a
+\renewcommand{\thesubsubpoint}{\thesubpoint.\arabic{subsubpoint}}
+\NewDocumentCommand{\soussouspoint}{smo}{
+  \saut
+  \refstepcounter{subsubpoint}\IfNoValueTF{#3}{}{\label{sspt:#3}}
+  \hangindent=2cm
+  \IfBooleanTF{#1}{
+    & \multicolumn{2}{m{12cm}}{\hspace{2em}\thesubsubpoint\hspace{1.5em}#2} \\
+    & & \textit{Point statutaire.} \\
+  }{
+    & \multicolumn{2}{m{12cm}}{\hspace{2em}\thesubsubpoint\hspace{1.5em}#2} \\
+  }
+  \hangindent=0cm
+  \addcontentsline{toc}{subsection}{\hspace{2em}\thesubsubpoint\hspace{1.5em} #2}
+}
+
+% Sous Sous Sous Point: x.y.z.a.b
+\renewcommand{\thesubsubsubpoint}{\thesubsubpoint.\arabic{subsubsubpoint}}
+\NewDocumentCommand{\soussoussouspoint}{smo}{
+  \saut
+  \refstepcounter{subsubsubpoint}\IfNoValueTF{#3}{}{\label{ssspt:#3}}
+  \hangindent=2cm
+  \IfBooleanTF{#1}{
+    & \multicolumn{2}{m{12cm}}{\hspace{2em}\thesubsubsubpoint\hspace{1.5em}#2} \\
+    & & \textit{Point statutaire.} \\
+  }{
+    & \multicolumn{2}{m{12cm}}{\hspace{2em}\thesubsubsubpoint\hspace{1.5em}#2} \\
+  }
+  \hangindent=0cm
+  \addcontentsline{toc}{subsection}{\hspace{2em}\thesubsubsubpoint\hspace{1.5em} #2}
+}
+
+% Vote -> Demande de vote
+\NewDocumentCommand{\vote}{m}{
+	\procedure{#1 demande le vote.}
+}
+
+%%%
+% Tableau de présences/statistiques
+%%%
+\newcommand{\presence}[2]{
+#1 & #2 \\
+}
+
+\newcommand{\titrepresence}[1]{
+\multicolumn{2}{@{}l}{\centering{\textbf{\uppercase{#1}}}}\\
+}
+
+%%% 
+% Statistical counters
+%%%
+\newcounter{interventions}
+\newcounter{interventionsh}
+\newcounter{interventionsf}
+\newcounter{offsethommes}
+\newcounter{offsetfemmes}
+
+% Step the intervention counters
+\newcommand{\interventionhomme}{\stepcounter{interventions}\stepcounter{interventionsh}}
+\newcommand{\interventionfemme}{\stepcounter{interventions}\stepcounter{interventionsf}}
+
+\newcommand{\fixInterventions}{
+	% fixes the disparities from presence table
+	\addtocounter{interventionsh}{-\theoffsethommes}
+	\addtocounter{interventionsf}{-\theoffsetfemmes}
+}
+
+\newcommand{\resetAssoCounters}{
+	% reset all association counters to 0 after the members table
+	% Useful to drop in praesidium offsets
+	\setcounter{offsethommes}{\theinterventionsh}
+	\setcounter{offsetfemmes}{\theinterventionsf}
+	\setcounter{interventions}{0}
+	\setcounter{interventionsf}{0}
+	\setcounter{interventionsh}{0}
+	\setcounter{AEFA}{0}
+	\setcounter{AEFATER}{0}
+	\setcounter{ADEEP}{0}
+	\setcounter{AGED}{0}
+	\setcounter{AGEEFEUS}{0}
+	\setcounter{AGEEMUS}{0}
+	\setcounter{AGEEP}{0}
+	\setcounter{AGEESIUS}{0}
+	\setcounter{AGEFLESH}{0}
+	\setcounter{AGEG}{0}
+	\setcounter{AGER}{0}
+	\setcounter{AGES}{0}
+	\setcounter{FEUS}{0}
+}
+
+% Statistics table functions
+\newcommand{\titrestats}[1]{
+	\hline\multicolumn{2}{||c||}{\textbf{\uppercase{#1}}} \\
+}
+\newcommand{\statperso}[2]{
+#1 & #2 \\
+}
+\newcommand{\statsasso}[2]{
+	\hline\hline
+	#1 & #2 \\\hline
+}
+\newcommand{\statskip}{
+\hline
+\multicolumn{2}{l}{}\\
+}
+
+%%%
+% Technical functions
+%%%
+
+% Replace "Table des matieres" with "Ordre du jour"
+\addto\captionsfrench{
+	\renewcommand{\contentsname}{\uppercase{Ordre du Jour}}
+}
+
+% Officers signatures box
+\newcommand{\signatures}[2]{
+	\begin{tabularx}{\textwidth}{XXX}
+	& & \\\cline{1-1}\cline{3-3}
+	#1 & & #2\\
+	Présidence d'assemblée & & Secrétariat d'assemblée\\
+	\end{tabularx}
+
+}
+
+% Enables BEST OF functionnality
+\newbool{bestof}
+%\booltrue{bestof} % For Best of version
+\boolfalse{bestof} % For sane version

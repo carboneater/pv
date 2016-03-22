@@ -1,0 +1,187 @@
+\makeatletter
+%%% MEMBRES
+
+% Usage, applies to all macros:
+% \macro ->   returns the name
+% \macro* ->  returns the name, underlined
+% \macro** -> returns the association name, underlined, followed by a colon
+% \macro*** ->  returns the association name
+
+%%%
+% To Create new entries:
+%%%
+% Open https://regex101.com
+
+% Copy all the text from here to the source box on the site
+
+% Add all the new entries in the following form:
+% <Full Name> | <macro name> | <Association Name> | <homme|femme>
+
+% In the regex field, enter the following regex (between the two /s)
+% /^((?:[\s-]?\b\w+\b)+)\s?\|\s?\\?\b(\w+)\b\s?\|\s?\b(\w+)\b\s?\|\s?\b(homme|femme)\b\s?$\n/
+
+% In the modifier field (second box after the / ), set the following flags to enable UTF-8 multiline greedy mode:
+% /gmu
+
+% In the substitution field, enter the following instruction: (literrally between the %%%s)
+%%%
+% \1 %\n\\newcounter\{\2\}\n\\ifbool\{ca\}\{\\setcounter\{\2\}\{-2\}\}\{\}\n\\NewDocumentCommand\{\\\2\}\{sss\}\{\\IfBooleanTF\{\#2\}\{\\\@i\2\\IfBooleanTF\{\#3\}\{\3\}\{\\uline\{\3\~:\}\}\}\{\\IfBooleanTF\{\#1\}\{\\\@i\2\\uline\{\\\@\2\~:\}\}\{\\ifbool\{ca\}\{\\\@i\2\}\{\}\\\@\2\}\}\}\n\\newcommand\{\\\@i\2\}\{\\intervention\4\\stepcounter\{\3\}\\stepcounter\{\2\}\}\n\\newcommand\{\\\@\2\}\{\1\}\n
+%%%
+% Copy and paste the results back here
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%
+% ADEEP
+%%%
+\newcounter{ADEEP}
+% Inconnu ADEEP %
+\newcounter{iADEEP}
+\ifbool{ca}{\setcounter{iADEEP}{-2}}{}
+\NewDocumentCommand{\iADEEP}{sss}{\IfBooleanTF{#2}{\@iiADEEP\IfBooleanTF{#3}{ADEEP}{\uline{ADEEP~:}}}{\IfBooleanTF{#1}{\@iiADEEP\uline{\@iADEEP~:}}{\ifbool{ca}{\@iiADEEP}{}\@iADEEP}}}
+\newcommand{\@iiADEEP}{\interventionhomme\stepcounter{ADEEP}\stepcounter{iADEEP}}
+\newcommand{\@iADEEP}{Inconnu ADEEP}
+
+%AEFA
+\newcounter{AEFA}
+% Inconnu AEFA %
+\newcounter{iAEFA}
+\ifbool{ca}{\setcounter{iAEFA}{-2}}{}
+\NewDocumentCommand{\iAEFA}{sss}{\IfBooleanTF{#2}{\@iiAEFA\IfBooleanTF{#3}{AEFA}{\uline{AEFA~:}}}{\IfBooleanTF{#1}{\@iiAEFA\uline{\@iAEFA~:}}{\ifbool{ca}{\@iiAEFA}{}\@iAEFA}}}
+\newcommand{\@iiAEFA}{\interventionhomme\stepcounter{AEFA}\stepcounter{iAEFA}}
+\newcommand{\@iAEFA}{Inconnu AEFA}
+
+%%%
+% AGED
+%%%
+\newcounter{AGED}
+% Inconnu AGED %
+\newcounter{iAGED}
+\ifbool{ca}{\setcounter{iAGED}{-2}}{}
+\NewDocumentCommand{\iAGED}{sss}{\IfBooleanTF{#2}{\@iiAGED\IfBooleanTF{#3}{AGED}{\uline{AGED~:}}}{\IfBooleanTF{#1}{\@iiAGED\uline{\@iAGED~:}}{\ifbool{ca}{\@iiAGED}{}\@iAGED}}}
+\newcommand{\@iiAGED}{\interventionhomme\stepcounter{AGED}\stepcounter{iAGED}}
+\newcommand{\@iAGED}{Inconnu AGED}
+
+%%%
+% AGEEFEUS
+%%%
+\newcounter{AGEEFEUS}
+% Inconnu AGEEFEUS %
+\newcounter{iAGEEFEUS}
+\ifbool{ca}{\setcounter{iAGEEFEUS}{-2}}{}
+\NewDocumentCommand{\iAGEEFEUS}{sss}{\IfBooleanTF{#2}{\@iiAGEEFEUS\IfBooleanTF{#3}{AGEEFEUS}{\uline{AGEEFEUS~:}}}{\IfBooleanTF{#1}{\@iiAGEEFEUS\uline{\@iAGEEFEUS~:}}{\ifbool{ca}{\@iiAGEEFEUS}{}\@iAGEEFEUS}}}
+\newcommand{\@iiAGEEFEUS}{\interventionhomme\stepcounter{AGEEFEUS}\stepcounter{iAGEEFEUS}}
+\newcommand{\@iAGEEFEUS}{Inconnu AGEEFEUS}
+
+%%%
+% AGEEMUS
+%%%
+\newcounter{AGEEMUS}
+% Inconnu AGEEMUS %
+\newcounter{iAGEEMUS}
+\ifbool{ca}{\setcounter{iAGEEMUS}{-2}}{}
+\NewDocumentCommand{\iAGEEMUS}{sss}{\IfBooleanTF{#2}{\@iiAGEEMUS\IfBooleanTF{#3}{AGEEMUS}{\uline{AGEEMUS~:}}}{\IfBooleanTF{#1}{\@iiAGEEMUS\uline{\@iAGEEMUS~:}}{\ifbool{ca}{\@iiAGEEMUS}{}\@iAGEEMUS}}}
+\newcommand{\@iiAGEEMUS}{\interventionhomme\stepcounter{AGEEMUS}\stepcounter{iAGEEMUS}}
+\newcommand{\@iAGEEMUS}{Inconnu AGEEMUS}
+
+%%%
+% AGEEP
+%%%
+\newcounter{AGEEP}
+% Inconnu AGEEP %
+\newcounter{iAGEEP}
+\ifbool{ca}{\setcounter{iAGEEP}{-2}}{}
+\NewDocumentCommand{\iAGEEP}{sss}{\IfBooleanTF{#2}{\@iiAGEEP\IfBooleanTF{#3}{AGEEP}{\uline{AGEEP~:}}}{\IfBooleanTF{#1}{\@iiAGEEP\uline{\@iAGEEP~:}}{\ifbool{ca}{\@iiAGEEP}{}\@iAGEEP}}}
+\newcommand{\@iiAGEEP}{\interventionhomme\stepcounter{AGEEP}\stepcounter{iAGEEP}}
+\newcommand{\@iAGEEP}{Inconnu AGEEP}
+
+%%%
+% AGEESIUS
+%%%
+\newcounter{AGEESIUS}
+% Inconnu AGEESIUS %
+\newcounter{iAGEESIUS}
+\ifbool{ca}{\setcounter{iAGEESIUS}{-2}}{}
+\NewDocumentCommand{\iAGEESIUS}{sss}{\IfBooleanTF{#2}{\@iiAGEESIUS\IfBooleanTF{#3}{AGEESIUS}{\uline{AGEESIUS~:}}}{\IfBooleanTF{#1}{\@iiAGEESIUS\uline{\@iAGEESIUS~:}}{\ifbool{ca}{\@iiAGEESIUS}{}\@iAGEESIUS}}}
+\newcommand{\@iiAGEESIUS}{\interventionhomme\stepcounter{AGEESIUS}\stepcounter{iAGEESIUS}}
+\newcommand{\@iAGEESIUS}{Inconnu AGEESIUS}
+
+%%%
+% AGEFLESH
+%%%
+\newcounter{AGEFLESH}
+% Inconnu AGEFLESH %
+\newcounter{iAGEFLESH}
+\ifbool{ca}{\setcounter{iAGEFLESH}{-2}}{}
+\NewDocumentCommand{\iAGEFLESH}{sss}{\IfBooleanTF{#2}{\@iiAGEFLESH\IfBooleanTF{#3}{AGEFLESH}{\uline{AGEFLESH~:}}}{\IfBooleanTF{#1}{\@iiAGEFLESH\uline{\@iAGEFLESH~:}}{\ifbool{ca}{\@iiAGEFLESH}{}\@iAGEFLESH}}}
+\newcommand{\@iiAGEFLESH}{\interventionhomme\stepcounter{AGEFLESH}\stepcounter{iAGEFLESH}}
+\newcommand{\@iAGEFLESH}{Inconnu AGEFLESH}
+
+%%%
+% AGEG
+%%%
+\newcounter{AGEG}
+% Inconnu AGEG %
+\newcounter{iAGEG}
+\ifbool{ca}{\setcounter{iAGEG}{-2}}{}
+\NewDocumentCommand{\iAGEG}{sss}{\IfBooleanTF{#2}{\@iiAGEG\IfBooleanTF{#3}{AGEG}{\uline{AGEG~:}}}{\IfBooleanTF{#1}{\@iiAGEG\uline{\@iAGEG~:}}{\ifbool{ca}{\@iiAGEG}{}\@iAGEG}}}
+\newcommand{\@iiAGEG}{\interventionhomme\stepcounter{AGEG}\stepcounter{iAGEG}}
+\newcommand{\@iAGEG}{Inconnu AGEG}
+
+%%%
+% AGER
+%%%
+\newcounter{AGER}
+% Inconnu AGER %
+\newcounter{iAGER}
+\ifbool{ca}{\setcounter{iAGER}{-2}}{}
+\NewDocumentCommand{\iAGER}{sss}{\IfBooleanTF{#2}{\@iiAGER\IfBooleanTF{#3}{AGER}{\uline{AGER~:}}}{\IfBooleanTF{#1}{\@iiAGER\uline{\@iAGER~:}}{\ifbool{ca}{\@iiAGER}{}\@iAGER}}}
+\newcommand{\@iiAGER}{\interventionhomme\stepcounter{AGER}\stepcounter{iAGER}}
+\newcommand{\@iAGER}{Inconnu AGER}
+
+%%%
+% AGES
+%%%
+\newcounter{AGES}
+% Inconnu AGES %
+\newcounter{iAGES}
+\ifbool{ca}{\setcounter{iAGES}{-2}}{}
+\NewDocumentCommand{\iAGES}{sss}{\IfBooleanTF{#2}{\@iiAGES\IfBooleanTF{#3}{AGES}{\uline{AGES~:}}}{\IfBooleanTF{#1}{\@iiAGES\uline{\@iAGES~:}}{\ifbool{ca}{\@iiAGES}{}\@iAGES}}}
+\newcommand{\@iiAGES}{\interventionhomme\stepcounter{AGES}\stepcounter{iAGES}}
+\newcommand{\@iAGES}{Inconnu AGES}
+
+%%%
+% FEUS
+%%%
+\newcounter{FEUS}
+% Inconnu FEUS %
+\newcounter{iFEUS}
+\ifbool{ca}{\setcounter{iFEUS}{-2}}{}
+\NewDocumentCommand{\iFEUS}{sss}{\IfBooleanTF{#2}{\@iiFEUS\IfBooleanTF{#3}{FEUS}{\uline{FEUS~:}}}{\IfBooleanTF{#1}{\@iiFEUS\uline{\@iFEUS~:}}{\ifbool{ca}{\@iiFEUS}{}\@iFEUS}}}
+\newcommand{\@iiFEUS}{\interventionhomme\stepcounter{FEUS}\stepcounter{iFEUS}}
+\newcommand{\@iFEUS}{Inconnu FEUS}
+
+%%%
+% Rectorat
+%%%
+\newcounter{Rectorat}
+% Inconnu Rectorat %
+\newcounter{iRectorat}
+\ifbool{ca}{\setcounter{iRectorat}{-2}}{}
+\NewDocumentCommand{\iRectorat}{sss}{\IfBooleanTF{#2}{\@iiRectorat\IfBooleanTF{#3}{Rectorat}{\uline{Rectorat~:}}}{\IfBooleanTF{#1}{\@iiRectorat\uline{\@iRectorat~:}}{\ifbool{ca}{\@iiRectorat}{}\@iRectorat}}}
+\newcommand{\@iiRectorat}{\interventionhomme\stepcounter{Rectorat}\stepcounter{iRectorat}}
+\newcommand{\@iRectorat}{Inconnu Rectorat}
+
+%%%
+% REMDUS
+%%%
+\newcounter{REMDUS}
+% Inconnu REMDUS %
+\newcounter{iREMDUS}
+\ifbool{ca}{\setcounter{iREMDUS}{-2}}{}
+\NewDocumentCommand{\iREMDUS}{sss}{\IfBooleanTF{#2}{\@iiREMDUS\IfBooleanTF{#3}{REMDUS}{\uline{REMDUS~:}}}{\IfBooleanTF{#1}{\@iiREMDUS\uline{\@iREMDUS~:}}{\ifbool{ca}{\@iiREMDUS}{}\@iREMDUS}}}
+\newcommand{\@iiREMDUS}{\interventionhomme\stepcounter{REMDUS}\stepcounter{iREMDUS}}
+\newcommand{\@iREMDUS}{Inconnu REMDUS}
+
+%%% END MEMBRES
+\makeatother

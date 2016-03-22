@@ -157,3 +157,9 @@ pythontex-files-*/
 
 # Latexian
 TSWLatexianTemp*
+
+# FEUS-Specific files, not to commit to public
+config.tex
+membres.tex
+ltxt.tex
+stats.tex
