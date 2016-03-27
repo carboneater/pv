@@ -12,6 +12,8 @@
 %%%
 % Macros de postes FEUS
 %%%
+\NewDocumentCommand{\prez}{s}{\IfBooleanTF{#1}{présidente}{président}}
+\NewDocumentCommand{\Prez}{s}{\IfBooleanTF{#1}{Présidente}{Président}}
 \NewDocumentCommand{\ractivite}{s}{\IfBooleanTF{#1}{Responsable aux activités étudiantes}{responsable aux activités étudiantes}}
 \NewDocumentCommand{\ranp}{s}{\IfBooleanTF{#1}{Responsable aux affaires nationales et politiques}{responsable aux affaires nationales et politiques}}
 \NewDocumentCommand{\raur}{s}{\IfBooleanTF{#1}{Responsable aux affaires universitaires et à la recherche}{responsable aux affaires universitaires et à la recherche}}
@@ -21,8 +23,14 @@
 \NewDocumentCommand{\rexterne}{s}{\IfBooleanTF{#1}{Responsable aux affaires externes}{responsable aux affaires externes}}
 \NewDocumentCommand{\rrc}{s}{\IfBooleanTF{#1}{Responsable aux relations et communications}{responsable aux relations et communications}}
 \NewDocumentCommand{\rsg}{s}{\IfBooleanTF{#1}{Responsable au secrétariat général}{responsable au secrétariat général}}
+\NewDocumentCommand{\sg}{s}{secrétaire général\IfBooleanTF{#1}{e}{}}
+\NewDocumentCommand{\SG}{s}{Secrétaire général\IfBooleanTF{#1}{e}{}}
 \NewDocumentCommand{\preza}{s}{\IfBooleanTF{#1}{présidente d'assemblée}{président d'assemblée}}
 \newcommand{\seca}{secrétaire d'assemblée}
+\NewDocumentCommand{\vpactivite}{s}{vice-président\IfBooleanTF{#1}{e}{} aux activités étudiantes}
+\NewDocumentCommand{\VPactivite}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux activités étudiantes}
+\NewDocumentCommand{\vpex}{s}{vice-président\IfBooleanTF{#1}{e}{} aux affaires externes}
+\NewDocumentCommand{\VPEX}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux affaires externes}
 %%%
 % Macros d'adoptions communs
 %%%
@@ -36,11 +44,10 @@
 \newcommand{\pbam}{La proposition est battue à majorité.}
 \newcommand{\qpau}{La question préalable passe à l'unanimité.}
 \newcommand{\qpam}{La question préalable passe aux deux tiers.}
-
-%%%
-% Macros d'élections
-%%%
-%\NewDocumentCommand{\election
+\newcommand{\saam}{Le sous-amendement est adopté à majorité.}
+\newcommand{\saau}{Le sous-amendement est adopté à l'unanimité.}
+\newcommand{\saaua}{Le sous-amendement est adopté à l'unanimité, avec abstentions.}
+\newcommand{\sabam}{Le sous-amendement est battu à majorité.}
 
 %%%
 % Macros d'instances FEUS
@@ -303,6 +310,8 @@
 % Officers signatures box
 \newcommand{\signatures}[2]{
 	\begin{tabularx}{\textwidth}{XXX}
+	& & \\
+	& & \\
 	& & \\\cline{1-1}\cline{3-3}
 	#1 & & #2\\
 	Présidence d'assemblée & & Secrétariat d'assemblée\\
@@ -314,3 +323,7 @@
 \newbool{bestof}
 %\booltrue{bestof} % For Best of version
 \boolfalse{bestof} % For sane version
+
+% Document Color Specs
+% \color{white}
+% \pagecolor{black}

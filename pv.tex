@@ -56,9 +56,9 @@
 
 \setcounter{tocdepth}{2}
 
-\title{Procès Verbal\\\cm*\\\session\ - \instance\theinstance\ - FEUS\\~
-\\(\theinstance\textsuperscript{e} séance, \thesession\textsuperscript{e} session, \theannee\textsuperscript{e} année financière de la FEUS)}
-\preauthor{\begin{center}\includegraphics[width=0.5\textwidth]{LogoFEUS2015_vert_seul.eps}~\\[1cm]}
+\title{Procès Verbal\\\instanceMacro\\\session\ - \instance\theinstance\ - \organisme\ifbool{showFEUSCoverHeader}{\\~
+\\(\theinstance\textsuperscript{e} séance, \thesession\textsuperscript{e} session, \theannee\textsuperscript{e} année financière de la FEUS)}{}}
+\preauthor{\begin{center}\includegraphics[width=0.5\textwidth]{\coverLogo}~\\[1cm]}
 \author{}
 \postauthor{\end{center}}
 
@@ -72,6 +72,7 @@
 \maketitle
 \tableofcontents
 
+\ifbool{showAttendees}{
 \clearpage
 \par{PROCÈS VERBAL de  la \instanceaulong~(\theinstance\textsuperscript{re}) séance du \cm\ de la \sessionaulong~(\thesession\textsuperscript{e}) session de la \anneeaulong~(\theannee\textsuperscript{e}) année financière de la FEUS qui a eu lieu le \jour\ \thedate\ à \heure\ au local \local\ de la \fmss\ de l’\udes.}
 
@@ -109,7 +110,7 @@
 
 \saut
 \titrepresence{Pr{\AE}sidium}
-\presence{\textxeta}{Présidence d'assemblée}
+\presence{\textzeta}{Présidence d'assemblée}
 \presence{\textxi}{Secrétariat d'Assemblée}
 \saut
 \titrepresence{Observateurs}
@@ -118,6 +119,7 @@
 \presence{Aucun délégué}{\textPhi}
 \end{longtable}
 \resetAssoCounters
+}{}
 
 \clearpage
 \setcounter{interventions}{0}

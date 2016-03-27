@@ -1,0 +1,5 @@
+FROM 3e45fae
+- Added new autotext functions
+- Added new configuration options
+- Fixed a minor quirk with the new member regex
+

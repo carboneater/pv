@@ -5,6 +5,17 @@
 
 % L'acronyme de l'instance en cours, sans la numérotation ex: CA, CM, ...
 \newcommand{\instance}{CM}
+\newcommand{\instanceMacro}{\cm*}
+
+% Afficher le long entête de la FEUS sur la page couverture
+\newbool{showFEUSCoverHeader}
+\booltrue{showFEUSCoverHeader}
+% \boolfalse{showFEUSCoverHeader}
+
+% Afficher la liste des présences
+\newbool{showAttendees}
+\booltrue{showAttendees}
+% \boolfalse{showAttendees}
 
 % Compteur de l'année d'opération de la FEUS, seulement changer le dernier chiffre.
 \newcounter{annee}
@@ -37,6 +48,9 @@
 \booltrue{useUnderline}
 %\boolfalse{useUnderline}
 
+% Organisme
+\newcommand{\organisme}{FEUS}
+
 % Date de la réunion
 \date{16 mars 2016}
 
@@ -47,7 +61,12 @@
 \newcommand{\jour}{mercredi}
 
 % Local de l'instance. Simplement changer le dernier champs.
+
+% Local de l'instance. Simplement changer le dernier champs.
 \newcommand{\local}{D2-1060}
 
 % Session de l'instance. Simplement changer le dernier champs.
 \newcommand{\session}{H16}
+
+% Nom de l'image pour la page de couverture (en PNG, JPG, SVG, EPS ou PDF/AI)
+\newcommand{\coverLogo}{logo_ageflesh.png}
