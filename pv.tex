@@ -1,25 +1,25 @@
 \documentclass[letterpaper,10pt]{report}
 \usepackage{array}						% For tables
 \usepackage[french]{babel}					% French Dictionnary
-\usepackage{color}
+\usepackage{color}							% For color options
 \usepackage{etoolbox}						% For boolean logic
 \usepackage[T1]{fontenc}					% Font Encoding
 \usepackage{graphicx}						% Pour les images
-\usepackage{ifpdf}						% IfPDF
+\usepackage{ifpdf}							% IfPDF
 \usepackage[utf8]{inputenc}					% Input Encoding
-\usepackage{lmodern}
+\usepackage{lmodern}						% For Latin Modern Fonts (T1 extension)
 \usepackage{longtable}						% For LONG tables
 \usepackage{ltxtable}						% For Long TabularX Tables
-\usepackage[margin=1.25cm]{geometry}				% Set thin margins
+\usepackage[margin=1.25cm]{geometry}		% Set thin margins
 \usepackage{pbox}
-\usepackage{soulutf8}
-\usepackage{substr}
+\usepackage{soulutf8}						% For UTF-8 Styling
+\usepackage{substr}							% For handling strings
 \usepackage{tabularx}						% For auto-adjusting tables
 \usepackage{textgreek}						% For greek letters in text mode
 \usepackage{titlesec}						% Titles reformatting
 \usepackage{titling}						% Accessing title page values
-\usepackage{ulem}						% For Underlining and Strikeout
-\usepackage{xparse}
+\usepackage{ulem}							% For Underlining and Strikeout
+\usepackage{xparse}							% For more intelligent commands
 
 \ifpdf
 	% PDFLaTeX needs support for EPS graphics
@@ -74,7 +74,7 @@
 
 \ifbool{showAttendees}{
 \clearpage
-\par{PROCÈS VERBAL de  la \instanceaulong~(\theinstance\textsuperscript{re}) séance du \cm\ de la \sessionaulong~(\thesession\textsuperscript{e}) session de la \anneeaulong~(\theannee\textsuperscript{e}) année financière de la FEUS qui a eu lieu le \jour\ \thedate\ à \heure\ au local \local\ de la \fmss\ de l’\udes.}
+\par{PROCÈS VERBAL de  la \instanceaulong~(\theinstance\textsuperscript{re}) séance du \cm\ de la \sessionaulong~(\thesession\textsuperscript{e}) session de la \anneeaulong~(\theannee\textsuperscript{e}) année financière de la FEUS qui a eu lieu le \jour\ \thedate\ à \heure\ au local \local\ de la \faculte\ de l’\udes.}
 
 \begin{longtable}{@{}l  l}
 \titrepresence{Présences au \instance}

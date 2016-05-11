@@ -12,6 +12,7 @@
 %%%
 % Macros de postes FEUS
 %%%
+\NewDocumentCommand{\Admin}{s}{Administrat\IfBooleanTF{#1}{rice}{eur} Annuel\IfBooleanTF{#1}{le}{}}
 \NewDocumentCommand{\prez}{s}{\IfBooleanTF{#1}{présidente}{président}}
 \NewDocumentCommand{\Prez}{s}{\IfBooleanTF{#1}{Présidente}{Président}}
 \NewDocumentCommand{\ractivite}{s}{\IfBooleanTF{#1}{Responsable aux activités étudiantes}{responsable aux activités étudiantes}}
@@ -28,9 +29,18 @@
 \NewDocumentCommand{\preza}{s}{\IfBooleanTF{#1}{présidente d'assemblée}{président d'assemblée}}
 \newcommand{\seca}{secrétaire d'assemblée}
 \NewDocumentCommand{\vpactivite}{s}{vice-président\IfBooleanTF{#1}{e}{} aux activités étudiantes}
-\NewDocumentCommand{\VPactivite}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux activités étudiantes}
+\NewDocumentCommand{\VPActivite}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux activités étudiantes}
+\NewDocumentCommand{\vpaur}{s}{vice-président\IfBooleanTF{#1}{e}{} aux affaires universitaires et à la recherche}
+\NewDocumentCommand{\VPAUR}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux affaires universitaires et à la recherche}
+\NewDocumentCommand{\vpce}{s}{vice-président\IfBooleanTF{#1}{e}{} à la condition étudiante}
+\NewDocumentCommand{\VPCE}{s}{Vice-président\IfBooleanTF{#1}{e}{} à la condition étudiante}
+\NewDocumentCommand{\vpddalc}{s}{vice-président\IfBooleanTF{#1}{e}{} au développement durable, aux affaires locales et communautaires}
+\NewDocumentCommand{\VPDDALC}{s}{Vice-président\IfBooleanTF{#1}{e}{} au développement durable, aux affaires locales et communautaires}
 \NewDocumentCommand{\vpex}{s}{vice-président\IfBooleanTF{#1}{e}{} aux affaires externes}
 \NewDocumentCommand{\VPEX}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux affaires externes}
+\NewDocumentCommand{\vprc}{s}{vice-président\IfBooleanTF{#1}{e}{} aux relations et communications}
+\NewDocumentCommand{\VPRC}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux relations et communications}
+
 %%%
 % Macros d'adoptions communs
 %%%
@@ -114,7 +124,7 @@
 \NewDocumentCommand{\nomination}{smmo}{
 	% * -> Flags a refused nomination
 	% #2 -> Proposer
-	% #3 -> Seconder
+	% #3 -> Nominee
 	% #4 -> Additionnal flag
 	\saut
 	\procedure{#2 nomine #3\IfNoValueTF{#4}{}{ au poste de #4}.}
