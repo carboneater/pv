@@ -15,7 +15,7 @@
 \usepackage{soulutf8}						% For UTF-8 Styling
 \usepackage{substr}							% For handling strings
 \usepackage{tabularx}						% For auto-adjusting tables
-\usepackage{textgreek}						% For greek letters in text mode
+% \usepackage{textgreek}						% For greek letters in text mode
 \usepackage{titlesec}						% Titles reformatting
 \usepackage{titling}						% Accessing title page values
 \usepackage{ulem}							% For Underlining and Strikeout
@@ -58,9 +58,9 @@
 
 \title{Procès Verbal\\\instanceMacro\\\session\ - \instance\theinstance\ - \organisme\ifbool{showFEUSCoverHeader}{\\~
 \\(\theinstance\textsuperscript{e} séance, \thesession\textsuperscript{e} session, \theannee\textsuperscript{e} année financière de la FEUS)}{}}
-\preauthor{\begin{center}\includegraphics[width=0.5\textwidth]{\coverLogo}~\\[1cm]}
+\preauthor{\ifbool{showLogo}{\begin{center}\includegraphics[width=0.5\textwidth]{\coverLogo}~\\[1cm]}{}}
 \author{}
-\postauthor{\end{center}}
+\postauthor{\ifbool{showLogo}{\end{center}}{}}
 
 \makeatletter
 \addto\captionsfrench{

@@ -2,7 +2,7 @@
 Librairie de création de PVs pour Assemblées Délibérantes
 
 ## Comment l'utiliser
-Renommer chacun des fichiers  * .sample en un fichier  * .tex
+Renommer chacun des fichiers  * .sample.tex en un fichier  * .tex
 
 Ensuite, il suffit de suivre les instructions dans chacun des fichiers et le guide pour cuisiner un beau PV.
 
