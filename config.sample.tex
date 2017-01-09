@@ -19,23 +19,23 @@
 
 % Compteur de l'année d'opération de la FEUS, seulement changer le dernier chiffre.
 \newcounter{annee}
-\setcounter{annee}{26}
+\setcounter{annee}{27}
 % Compte de l'année en texte. Seulement changer le dernier champs.
-\newcommand{\anneeaulong}{vingt-sixième}
+\newcommand{\anneeaulong}{vingt-septième}
 % Utiliser/Afficher l'année dans le PV
 \newbool{showYear}
-%\booltrue{showYear}
-\boolfalse{showYear}
+\booltrue{showYear}
+% \boolfalse{showYear}
 
 % Compteur de la session de l'année d'opération de la FEUS, seulement changer le dernier chiffre.
 \newcounter{session}
-\setcounter{session}{3}
+\setcounter{session}{1}
 % Compte de la session en texte. Seulement changer le dernier champs.
-\newcommand{\sessionaulong}{troisième}
-% Utiliser/Afficher l'année dans le PV
+\newcommand{\sessionaulong}{première}
+% Utiliser/Afficher la session dans le PV
 \newbool{showSession}
-%\booltrue{showSession}
-\boolfalse{showSession}
+\booltrue{showSession}
+% \boolfalse{showSession}
 
 % Compteur de l'instance de la session en cours, seulement changer le dernier chiffre.
 \newcounter{instance}
@@ -67,7 +67,15 @@
 \newcommand{\local}{D2-1060}
 
 % Session de l'instance. Simplement changer le dernier champs.
-\newcommand{\session}{H16}
+\newcommand{\session}{E16}
 
 % Nom de l'image pour la page de couverture (en PNG, JPG, SVG, EPS ou PDF/AI)
+<<<<<<< HEAD
 \newcommand{\coverLogo}{logo_ageflesh.png}
+=======
+\newcommand{\coverLogo}{LogoFEUS2015_vert_seul.eps}
+% Afficher le logo en page couverture
+\newbool{showLogo}
+\booltrue{showLogo}
+% \boolfalse{showLogo}
+>>>>>>> 831c1c062d9cac39e7d6b43822f7f7059c4d5d26
