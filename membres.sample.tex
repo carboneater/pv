@@ -42,15 +42,6 @@
 \newcommand{\@iiADEEP}{\interventionhomme\stepcounter{ADEEP}\stepcounter{iADEEP}}
 \newcommand{\@iADEEP}{Inconnu ADEEP}
 
-%AEFA
-\newcounter{AEFA}
-% Inconnu AEFA %
-\newcounter{iAEFA}
-\ifbool{ca}{\setcounter{iAEFA}{-2}}{}
-\NewDocumentCommand{\iAEFA}{sss}{\IfBooleanTF{#2}{\@iiAEFA\IfBooleanTF{#3}{AEFA}{\uline{AEFA~:}}}{\IfBooleanTF{#1}{\@iiAEFA\uline{\@iAEFA~:}}{\ifbool{ca}{\@iiAEFA}{}\@iAEFA}}}
-\newcommand{\@iiAEFA}{\interventionhomme\stepcounter{AEFA}\stepcounter{iAEFA}}
-\newcommand{\@iAEFA}{Inconnu AEFA}
-
 %%%
 % AGED
 %%%
@@ -149,6 +140,18 @@
 \NewDocumentCommand{\iAGES}{sss}{\IfBooleanTF{#2}{\@iiAGES\IfBooleanTF{#3}{AGES}{\uline{AGES~:}}}{\IfBooleanTF{#1}{\@iiAGES\uline{\@iAGES~:}}{\ifbool{ca}{\@iiAGES}{}\@iAGES}}}
 \newcommand{\@iiAGES}{\interventionhomme\stepcounter{AGES}\stepcounter{iAGES}}
 \newcommand{\@iAGES}{Inconnu AGES}
+
+%%%
+% REGS
+%%%
+\newcounter{REGS}
+% Inconnu REGS %
+\newcounter{iREGS}
+\ifbool{ca}{\setcounter{iREGS}{-2}}{}
+\NewDocumentCommand{\iREGS}{sss}{\IfBooleanTF{#2}{\@iiREGS\IfBooleanTF{#3}{REGS}{\uline{REGS~:}}}{\IfBooleanTF{#1}{\@iiREGS\uline{\@iREGS~:}}{\ifbool{ca}{\@iiREGS}{}\@iREGS}}}
+\newcommand{\@iiREGS}{\interventionhomme\stepcounter{REGS}\stepcounter{iREGS}}
+\newcommand{\@iREGS}{Inconnu REGS}
+
 
 %%%
 % FEUS
