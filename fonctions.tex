@@ -5,6 +5,7 @@
 
 \newcounter{annexe}
 \newcounter{point}
+\newcounter{proposition}[point]
 \newcounter{subpoint}[point]
 \newcounter{subsubpoint}[subpoint]
 \newcounter{subsubsubpoint}[subsubpoint]
@@ -156,7 +157,8 @@
 % #2 -> Proposeur et libellé
 % #3 -> Appuyeur
 	\saut
-	& \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
+	\refstepcounter{proposition}
+	(\thepoint\ifnumcomp{\value{subpoint}}{>}{0}{.\arabic{subpoint}\ifnumcomp{\value{subsubpoint}}{>}{0}{.\arabic{subsubpoint}\ifnumcomp{\value{subsubsubpoint}}{>}{0}{.\arabic{subsubsubpoint}}{}}{}}{}.\theproposition) & \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
 	\IfBooleanTF{#1}{\resultat{La proposition tombe faute d'appui.}}{}
 }
 
@@ -190,6 +192,7 @@
 % Sous point: x.y.z
 \renewcommand{\thesubpoint}{\thepoint.\arabic{subpoint}}
 \NewDocumentCommand{\souspoint}{smo}{
+  \setcounter{proposition}{0} % Reset proposition counter
   \saut
   \hangindent=2cm
   \refstepcounter{subpoint}\IfNoValueTF{#3}{}{\label{spt:#3}}
@@ -206,6 +209,7 @@
 % Sous Sous Point: x.y.z.a
 \renewcommand{\thesubsubpoint}{\thesubpoint.\arabic{subsubpoint}}
 \NewDocumentCommand{\soussouspoint}{smo}{
+  \setcounter{proposition}{0} % Reset proposition counter
   \saut
   \refstepcounter{subsubpoint}\IfNoValueTF{#3}{}{\label{sspt:#3}}
   \hangindent=2cm
@@ -222,6 +226,7 @@
 % Sous Sous Sous Point: x.y.z.a.b
 \renewcommand{\thesubsubsubpoint}{\thesubsubpoint.\arabic{subsubsubpoint}}
 \NewDocumentCommand{\soussoussouspoint}{smo}{
+  \setcounter{proposition}{0} % Reset proposition counter
   \saut
   \refstepcounter{subsubsubpoint}\IfNoValueTF{#3}{}{\label{ssspt:#3}}
   \hangindent=2cm
