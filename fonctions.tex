@@ -156,9 +156,8 @@
 % #1 -> * flag non appuyé
 % #2 -> Proposeur et libellé
 % #3 -> Appuyeur
-	\saut
-	\refstepcounter{proposition}
-	(\thepoint\ifnumcomp{\value{subpoint}}{>}{0}{.\arabic{subpoint}\ifnumcomp{\value{subsubpoint}}{>}{0}{.\arabic{subsubpoint}\ifnumcomp{\value{subsubsubpoint}}{>}{0}{.\arabic{subsubsubpoint}}{}}{}}{}.\theproposition) & \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
+	\refstepcounter{proposition}\saut
+	\ifbool{showResolutionNo}{\multicolumn{1}{c}{(\ifbool{showInstanceNoInResolutionNo}{\instance\ \ifbool{showYear}{\theannee.}{}\ifbool{showSession}{\thesession/}{}}{}\thepoint\ifnumcomp{\value{subpoint}}{>}{0}{.\arabic{subpoint}\ifnumcomp{\value{subsubpoint}}{>}{0}{.\arabic{subsubpoint}\ifnumcomp{\value{subsubsubpoint}}{>}{0}{.\arabic{subsubsubpoint}}{}}{}}{}.\theproposition)}}{} & \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
 	\IfBooleanTF{#1}{\resultat{La proposition tombe faute d'appui.}}{}
 }
 
