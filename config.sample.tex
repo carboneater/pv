@@ -29,9 +29,9 @@
 
 % Compteur de la session de l'année d'opération de la FEUS, seulement changer le dernier chiffre.
 \newcounter{session}
-\setcounter{session}{1}
+\setcounter{session}{3}
 % Compte de la session en texte. Seulement changer le dernier champs.
-\newcommand{\sessionaulong}{première}
+\newcommand{\sessionaulong}{troisième}
 % Utiliser/Afficher la session dans le PV
 \newbool{showSession}
 \booltrue{showSession}
@@ -39,9 +39,9 @@
 
 % Compteur de l'instance de la session en cours, seulement changer le dernier chiffre.
 \newcounter{instance}
-\setcounter{instance}{2}
+\setcounter{instance}{1}
 % Compte de l'instance en texte. Seulement changer le dernier champs.
-\newcommand{\instanceaulong}{deuxième}
+\newcommand{\instanceaulong}{première}
 
 % Style: contrôler si les styles sont soulignés ou pas. Décommenter booltrue pour activer ou boolfalse pour désactiver.
 \newbool{useUnderline}
@@ -52,19 +52,19 @@
 \newcommand{\organisme}{FEUS}
 
 % Date de la réunion
-\date{16 mars 2016}
+\date{5 février 2017}
 
 % Heure de la convocation. Simplement changer le dernier champs.
-\newcommand{\heure}{17h30}
+\newcommand{\heure}{9h00}
 
 % Journée de l'instance. Simplement changer le dernier champs.
-\newcommand{\jour}{mercredi}
+\newcommand{\jour}{dimanche}
 
 % Faculté de l'instance. Simplement changer le dernier champs.
-\newcommand{\faculte}{\sciences}
+\newcommand{\faculte}{\fmss}
 
 % Local de l'instance. Simplement changer le dernier champs.
-\newcommand{\local}{D2-1060}
+\newcommand{\local}{Z7-3001}
 
 % Session de l'instance. Simplement changer le dernier champs.
 \newcommand{\session}{H17}
@@ -75,3 +75,14 @@
 \newbool{showLogo}
 \booltrue{showLogo}
 % \boolfalse{showLogo}
+
+% Affichage des numéros de propositions/résolutions:
+\newbool{showResolutionNo}
+\booltrue{showResolutionNo}
+% \boolfalse{showResolutionNo}
+
+%Affichage de la numérotation de l'instance dans la numérotation des propositions/résolutions
+% (Advice: Go for false on that one)
+\newbool{showInstanceNoInResolutionNo}
+% \booltrue{showInstanceNoInResolutionNo}
+\boolfalse{showInstanceNoInResolutionNo}
