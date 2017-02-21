@@ -18,15 +18,24 @@
 % <Full Name> | <macro name> | <Association Name> | <homme|femme>
 
 % In the regex field, enter the following regex (between the two /s)
-% /^((?:[\s-]?\b\w+\b)+)\s?\|\s?\\?\b(\w+)\b\s?\|\s?\b(\w+)\b\s?\|\s?\b(homme|femme)\b\s?$\n/
+% /^((?:[\s-]?\b\w+\b)+)\s?\|\s?\\?\b(\w+)\b\s?\|\s?\b(\w+)\b\s?\|\s?\b(homme|femme)\b\s?$\n/gimu
+%%%
+% KATE REGEX
+%%%
+% ((?:[\s-]?\w+)+)\s?\|\s?\\?(\w+)\s?\|\s?(\w+)\s?\|\s?(homme|femme)\s?\n
 
 % In the modifier field (second box after the / ), set the following flags to enable UTF-8 multiline greedy mode:
 % /gmu
 
 % In the substitution field, enter the following instruction: (literrally between the %%%s)
 %%%
-% \1 %\n\\newcounter\{\2\}\n\\ifbool\{ca\}\{\\setcounter\{\2\}\{-2\}\}\{\}\n\\NewDocumentCommand\{\\\2\}\{sss\}\{\\IfBooleanTF\{\#2\}\{\\\@i\2\\IfBooleanTF\{\#3\}\{\3\}\{\\uline\{\3\~:\}\}\}\{\\IfBooleanTF\{\#1\}\{\\\@i\2\\uline\{\\\@\2\~:\}\}\{\\ifbool\{ca\}\{\\\@i\2\}\{\}\\\@\2\}\}\}\n\\newcommand\{\\\@i\2\}\{\\intervention\4\\stepcounter\{\3\}\\stepcounter\{\2\}\}\n\\newcommand\{\\\@\2\}\{\1\}\n
+% \1 %\n\\newcounter\{\2\}\n\\ifbool\{ca\}\{\\setcounter\{\2\}\{-1\}\}\{\}\n\\NewDocumentCommand\{\\\2\}\{sss\}\{\\IfBooleanTF\{\#2\}\{\\\@i\2\\IfBooleanTF\{\#3\}\{\3\}\{\\uline\{\3\~:\}\}\}\{\\IfBooleanTF\{\#1\}\{\\\@i\2\\uline\{\\\@\2\~:\}\}\{\\ifbool\{ca\}\{\\\@i\2\}\{\}\\\@\2\}\}\}\n\\newcommand\{\\\@i\2\}\{\\intervention\4\\stepcounter\{\3\}\\stepcounter\{\2\}\}\n\\newcommand\{\\\@\2\}\{\1\}\n
 %%%
+
+%%%
+% KATE REGEX
+%%%
+% \1 %\n\\newcounter{\2}\n\\ifbool{ca}{\\setcounter{\2}{-1}}{}\n\\NewDocumentCommand{\\\2}{sss}{\\IfBooleanTF{#2\}{\\@i\2\\IfBooleanTF{#3}{\3}{\\uline\{\3\~:}}}{\\IfBooleanTF{#1}{\\@i\2\\uline{\\@\2\~:}}{\\ifbool{ca}{\\@i\2}{}\\@\2}}}\n\\newcommand{\\@i\2}{\\intervention\4\\stepcounter{\3}\\stepcounter{\2}}\n\\newcommand{\\@\2}{\1}\n
 % Copy and paste the results back here
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
