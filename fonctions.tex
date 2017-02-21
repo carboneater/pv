@@ -20,7 +20,7 @@
 \NewDocumentCommand{\ranp}{s}{\IfBooleanTF{#1}{Responsable aux affaires nationales et politiques}{responsable aux affaires nationales et politiques}}
 \NewDocumentCommand{\raur}{s}{\IfBooleanTF{#1}{Responsable aux affaires universitaires et à la recherche}{responsable aux affaires universitaires et à la recherche}}
 \NewDocumentCommand{\rcede}{s}{\IfBooleanTF{#1}{Responsable à la condition étudiante et aux droits des étudiants}{responsable à la condition étudiante et aux droits des étudiants}}
-\NewDocumentCommand{\rddalc}{s}{\IfBooleanTF{#1}{Responsable au développement durable et aux affaires locales et communautaires}{responsable au développement durable et aux affaires locales et \allowbreak communautaires}}
+\NewDocumentCommand{\rddalc}{s}{\IfBooleanTF{#1}{Responsable au développement durable et aux affaires locales et communautaires}{responsable au développement durable et aux affaires locales et communautaires}}
 \NewDocumentCommand{\rexec}{s}{\IfBooleanTF{#1}{Responsable à l'exécutif}{responsable à l'exécutif}}
 \NewDocumentCommand{\rexterne}{s}{\IfBooleanTF{#1}{Responsable aux affaires externes}{responsable aux affaires externes}}
 \NewDocumentCommand{\rrc}{s}{\IfBooleanTF{#1}{Responsable aux relations et communications}{responsable aux relations et communications}}
@@ -35,12 +35,12 @@
 \NewDocumentCommand{\VPAUR}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux affaires universitaires et à la recherche}
 \NewDocumentCommand{\vpce}{s}{vice-président\IfBooleanTF{#1}{e}{} à la condition étudiante}
 \NewDocumentCommand{\VPCE}{s}{Vice-président\IfBooleanTF{#1}{e}{} à la condition étudiante}
-\NewDocumentCommand{\vpddalc}{s}{vice-président\IfBooleanTF{#1}{e}{} au développement durable, aux affaires locales et communautaires}
-\NewDocumentCommand{\VPDDALC}{s}{Vice-président\IfBooleanTF{#1}{e}{} au développement durable, aux affaires locales et communautaires}
+\NewDocumentCommand{\vpddalc}{s}{vice-président\IfBooleanTF{#1}{e}{} au développement durable,\ aux\ affaires\ locales\ et\ communautaires}
+\NewDocumentCommand{\VPDDALC}{s}{Vice-président\IfBooleanTF{#1}{e}{} au développement durable,\ aux\ affaires\ locales\ et\ communautaires}
 \NewDocumentCommand{\vpex}{s}{vice-président\IfBooleanTF{#1}{e}{} aux affaires externes}
 \NewDocumentCommand{\VPEX}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux affaires externes}
-\NewDocumentCommand{\vprc}{s}{vice-président\IfBooleanTF{#1}{e}{} aux relations et communications}
-\NewDocumentCommand{\VPRC}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux relations et communications}
+\NewDocumentCommand{\vprc}{s}{vice-président\IfBooleanTF{#1}{e}{} aux communications}
+\NewDocumentCommand{\VPRC}{s}{Vice-président\IfBooleanTF{#1}{e}{} aux communications}
 
 %%%
 % Macros d'adoptions communs
@@ -48,10 +48,12 @@
 \newcommand{\aam}{L'amendement est adopté à majorité.}
 \newcommand{\aau}{L'amendement est adopté à l'unanimité.}
 \newcommand{\aaua}{L'amendement est adopté à l'unanimité, avec abstentions.}
+\newcommand{\abau}{L'amendement est battu à l'unanimité.}
 \newcommand{\abm}{L'amendement est battu à majorité.}
 \newcommand{\pam}{La proposition est adoptée à majorité.}
 \newcommand{\pau}{La proposition est adoptée à l'unanimité.}
 \newcommand{\paua}{La proposition est adoptée à l'unanimité, avec abstentions.}
+\newcommand{\pbau}{La proposition est battue à l'unanimité.}
 \newcommand{\pbm}{La proposition est battue à majorité.}
 \newcommand{\qpau}{La question préalable passe à l'unanimité.}
 \newcommand{\qpam}{La question préalable passe aux deux tiers.}
@@ -69,6 +71,7 @@
 \NewDocumentCommand{\cac}{s}{\IfBooleanTF{#1}{Comité d'étude des affaires des campi}{comité d'étude des affaires des campi}}
 \NewDocumentCommand{\cae}{s}{\IfBooleanTF{#1}{Comité d'étude des affaires externes}{comité d'étude des affaires externes}}
 \NewDocumentCommand{\cm}{s}{\IfBooleanTF{#1}{Conseil des membres}{conseil des membres}}
+\NewDocumentCommand{\cms}{s}{\IfBooleanTF{#1}{Conseil des membres spécial}{conseil des membres spécial}}
 \NewDocumentCommand{\cs}{s}{\IfBooleanTF{#1}{Commission Spéciale}{commission spéciale}}
 
 %%%
@@ -116,6 +119,15 @@
 
 \newcommand{\appui}[1]{
 	#1\ appuie.
+}
+
+\NewDocumentCommand{\caucus}{mmoo}{
+	% Arguments:
+	% #1 -> Requester
+	% #2 -> Duration
+	% #3 -> Begin time (optional)
+	% #4 -> End time (optional)
+	\procedure[Caucus]{#1 demande un caucus d'une durée de #2.\IfNoValueTF{#3}{}{\IfNoValueTF{#4}{}{\newline Début du caucus à #3.\newline Fin du caucus à #4.}}}
 }
 
 \newcommand{\discussion}[1]{
@@ -341,3 +353,17 @@
 % Document Color Specs
 % \color{white}
 % \pagecolor{black}
+
+%%%
+% REGEXES
+%%%
+
+% Reference REGEXes for faster editing:
+
+% Arrivals:
+% Shorthand Notation:
+% +\macro time
+% Selectors:
+% /% \+(\w*) (\d\d?h\d?\d?)\.?/
+% Replace:
+% /\\procedure{Arrivée de \\\1\\ à \2.}/
