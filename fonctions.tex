@@ -367,3 +367,9 @@
 % /% \+(\w*) (\d\d?h\d?\d?)\.?/
 % Replace:
 % /\\procedure{Arrivée de \\\1\\ à \2.}/
+
+% Capture all discussion entries and format them right (Use after everything else is set)
+% Selector:
+% /^% \\?(\w*)\*?:? (.*)$/
+% Replace: 
+% /\\discussion{\\\1** \2}/
