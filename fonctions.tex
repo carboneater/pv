@@ -48,7 +48,8 @@
 \newcommand{\aam}{L'amendement est adopté à majorité.}
 \newcommand{\aau}{L'amendement est adopté à l'unanimité.}
 \newcommand{\aaua}{L'amendement est adopté à l'unanimité, avec abstentions.}
-\newcommand{\abau}{L'amendement est battu à l'unanimité.}
+\newcommand{\abu}{L'amendement est battu à l'unanimité.}
+\newcommand{\abua}{L'amendement est battu à l'unanimité, avec abstentions.}
 \newcommand{\abm}{L'amendement est battu à majorité.}
 \newcommand{\pam}{La proposition est adoptée à majorité.}
 \newcommand{\pau}{La proposition est adoptée à l'unanimité.}
@@ -61,6 +62,13 @@
 \newcommand{\saau}{Le sous-amendement est adopté à l'unanimité.}
 \newcommand{\saaua}{Le sous-amendement est adopté à l'unanimité, avec abstentions.}
 \newcommand{\sabm}{Le sous-amendement est battu à majorité.}
+
+%%%
+% Macros d'élections communs
+%%%
+\NewDocumentCommand{\eu}{s}{Élu\IfBooleanTF{#1}{e}{} à l'unanimité.}
+\NewDocumentCommand{\eua}{s}{Élu\IfBooleanTF{#1}{e}{} à l'unanimité avec abstentions.}
+\NewDocumentCommand{\eam}{s}{Élu\IfBooleanTF{#1}{e}{} à majorité.} % em function is already defined
 
 %%%
 % Macros d'instances FEUS
@@ -163,13 +171,15 @@
 	& \IfNoValueTF{#1}{}{\ifbool{useUnderline}{\uline{#1~:}}{#1~:}} & \IfNoValueTF{#1}{\textit{#2}}{\textbf{#2}} \\
 }
 
-\NewDocumentCommand{\proposition}{smm}{
+\NewDocumentCommand{\proposition}{smmo}{
 % Arguments
 % #1 -> * flag non appuyé
 % #2 -> Proposeur et libellé
 % #3 -> Appuyeur
-	\refstepcounter{proposition}\saut
-	\ifbool{showResolutionNo}{\multicolumn{1}{c}{(\ifbool{showInstanceNoInResolutionNo}{\instance\ \ifbool{showYear}{\theannee.}{}\ifbool{showSession}{\thesession/}{}}{}\thepoint\ifnumcomp{\value{subpoint}}{>}{0}{.\arabic{subpoint}\ifnumcomp{\value{subsubpoint}}{>}{0}{.\arabic{subsubpoint}\ifnumcomp{\value{subsubsubpoint}}{>}{0}{.\arabic{subsubsubpoint}}{}}{}}{}.\theproposition)}}{} & \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
+% #4 -> Label pour URL
+	\refstepcounter{proposition}\IfNoValueTF{#4}{}{\label{#4}}
+	\saut
+	\ifbool{showResolutionNo}{\multicolumn{1}{c}{(\theproposition)}}{} & \ifbool{useUnderline}{\uline{Proposition~:}}{Proposition~:} & \par{\noindent\textbf{#2 \IfBooleanTF{#1}{}{Proposition appuyée par #3.}}} \\
 	\IfBooleanTF{#1}{\resultat{La proposition tombe faute d'appui.}}{}
 }
 
@@ -334,25 +344,51 @@
 }
 
 % Officers signatures box
-\newcommand{\signatures}[2]{
-	\begin{tabularx}{\textwidth}{XXX}
-	& & \\
-	& & \\
-	& & \\\cline{1-1}\cline{3-3}
-	#1 & & #2\\
-	Présidence d'assemblée & & Secrétariat d'assemblée\\
-	\end{tabularx}
-
+% \newcommand{\signatures}[2]{
+% 	\begin{tabularx}{\textwidth}{XXX}
+% 	& & \\
+% 	& & \\
+% 	& & \\\cline{1-1}\cline{3-3}
+% 	#1 & & #2\\
+% 	Présidence d'assemblée & & Secrétariat d'assemblée\\
+% 	\end{tabularx}
+% }
+\NewDocumentCommand{\signatures}{mmo}{
+	\IfNoValueTF{#3}{
+		% 2 arguments supllied
+		\begin{tabularx}{\textwidth}{XXX}
+		 & & \\
+		 & & \\
+		 & & \\\cline{1-1}\cline{3-3}
+		 #1 & & #2\\
+		 Présidence d'assemblée & & Secrétariat d'assemblée\\
+		\end{tabularx}
+	}{
+		% 3 member tags arguments supllied, requires all 6 fields?
+		\begin{tabularx}{\textwidth}{Xp{1cm}Xp{1cm}X}
+		 & & & & \\
+		 & & & & \\
+		 & & & & \\\cline{1-1}\cline{3-3}\cline{5-5}
+		 #1 & & #2 & & #3\\
+		 Présidence d'assemblée & & Secrétariat d'assemblée & & Secrétariat d'assemblée\\
+		\end{tabularx}
+	}
 }
 
-% Enables BEST OF functionnality
+% Enables BEST OF functionnality2
 \newbool{bestof}
 %\booltrue{bestof} % For Best of version
 \boolfalse{bestof} % For sane version
 
 % Document Color Specs
-% \color{white}
-% \pagecolor{black}
+\color{white}
+\pagecolor{black}
+
+%%%
+% Internals
+%%%
+\renewcommand{\theproposition}{
+	\ifbool{showInstanceNoInResolutionNo}{\instance\ \ifbool{showYear}{\theannee.}{}\ifbool{showSession}{\thesession/}{}}{}\thepoint\ifnumcomp{\value{subpoint}}{>}{0}{.\arabic{subpoint}\ifnumcomp{\value{subsubpoint}}{>}{0}{.\arabic{subsubpoint}\ifnumcomp{\value{subsubsubpoint}}{>}{0}{.\arabic{subsubsubpoint}}{}}{}}{}.\arabic{proposition}}
 
 %%%
 % REGEXES
@@ -360,13 +396,37 @@
 
 % Reference REGEXes for faster editing:
 
-% Arrivals:
+% Arrivals and departures:
 % Shorthand Notation:
-% +\macro time
-% Selectors:
-% /% \+(\w*) (\d\d?h\d?\d?)\.?/
-% Replace:
-% /\\procedure{Arrivée de \\\1\\ à \2.}/
+% ++\macro time -> Arrival
+% +\macro time -> Entry (temp leave)
+% -\macro time -> Exit (temp leave)
+% --\macro time -> Departure
+
+% Arrival:
+% % Selectors:
+% % /% \+\+(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % Replace:
+% % /\\procedure{Arrivée de \\\1\\ à \2.}/
+
+% Entry:
+% % Selectors:
+% % /% \+(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % Replace:
+% % /\\procedure{Retour de \\\1\\ à \2.}/
+
+% Exit:
+% % Selectors:
+% % /% \-(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % Replace:
+% % /\\procedure{Sortie de \\\1\\ à \2.}/
+
+% Departure:
+% % Selectors:
+% % /% \-\-(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % Replace:
+% % /\\procedure{Départ de \\\1\\ à \2.}/
+
 
 % Capture all discussion entries and format them right (Use after everything else is set)
 % Selector:
