@@ -21,18 +21,26 @@
 \usepackage{ulem}							% For Underlining and Strikeout
 \usepackage{xparse}							% For more intelligent commands
 
+\include{config}
+
 \ifpdf
 	% PDFLaTeX needs support for EPS graphics
 	\usepackage{epstopdf}
 	\epstopdfsetup{update}
 	% PDFLaTeX, can support HyperRef
 	\usepackage{hyperref}					% URLs dans la TOC
-	\hypersetup{
-		colorlinks,
-		citecolor=black,
-		filecolor=black,
-		linkcolor=black,
-		urlcolor=black
+	\ifbool{whiteOnBlack}{
+		\hypersetup{
+			colorlinks
+		}
+	}{
+		\hypersetup{
+			colorlinks,
+			citecolor=black,
+			filecolor=black,
+			linkcolor=black,
+			urlcolor=black
+		}
 	}
 % 	\usepackage[plain]{fancyref}				% URLs dans le document
 \else
@@ -43,7 +51,6 @@
 %%%
 % Instance du PV
 %%%
-\include{config}
 \include{fonctions} % FEUS-Specific functions
 % Test if CA
 \newbool{ca}

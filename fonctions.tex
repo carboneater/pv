@@ -382,8 +382,10 @@
 \boolfalse{bestof} % For sane version
 
 % Document Color Specs
-\color{white}
-\pagecolor{black}
+\ifbool{whiteOnBlack}{
+	\color{white}
+	\pagecolor{black}
+}{}
 
 %%%
 % Internals
