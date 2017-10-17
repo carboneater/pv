@@ -56,6 +56,7 @@
 \newcommand{\paua}{La proposition est adoptée à l'unanimité, avec abstentions.}
 \newcommand{\pbm}{La proposition est battue à majorité.}
 \newcommand{\pbu}{La proposition est battue à l'unanimité.}
+\newcommand{\pbua}{La proposition est battue à l'unanimité, avec abstentions.}
 \newcommand{\qpau}{La question préalable passe à l'unanimité.}
 \newcommand{\qpam}{La question préalable passe aux deux tiers.}
 \newcommand{\saam}{Le sous-amendement est adopté à majorité.}
@@ -143,6 +144,15 @@
 	& & #1 \\
 }
 
+\NewDocumentCommand{\lecture}{mmoo}{
+	% Arguments:
+	% #1 -> Requester
+	% #2 -> Duration
+	% #3 -> Begin time (optional)
+	% #4 -> End time (optional)
+	\procedure[Leture]{#1 demande un temps de lecture d'une durée de #2.\IfNoValueTF{#3}{}{\IfNoValueTF{#4}{}{\newline Début du temps de lecture à #3.\newline Fin du temps de lecture à #4.}}}
+}
+
 \NewDocumentCommand{\nomination}{smmo}{
 	% * -> Flags a refused nomination
 	% #2 -> Proposer
@@ -202,7 +212,7 @@
 
 \newcommand{\saut}{
 % Skips a line
-	& \\
+	& & \\
 }
 
 \NewDocumentCommand{\sousamendement}{smm}{
@@ -408,19 +418,19 @@
 
 % Arrival:
 % % Selectors:
-% % /% \+\+(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % /% \+\+\s?(\w+) (\d\d?[h\:]\d?\d?)\.?/
 % % Replace:
 % % /\\procedure{Arrivée de \\\1\\ à \2.}/
 
 % Entry:
 % % Selectors:
-% % /% \+(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % /% \+\s?(\w+) (\d\d?[h\:]\d?\d?)\.?/
 % % Replace:
 % % /\\procedure{Retour de \\\1\\ à \2.}/
 
 % Exit:
 % % Selectors:
-% % /% \-(\w+) (\d\d?[h\:]\d?\d?)\.?/
+% % /% \-\s?(\w+) (\d\d?[h\:]\d?\d?)\.?/
 % % Replace:
 % % /\\procedure{Sortie de \\\1\\ à \2.}/
 
@@ -430,6 +440,50 @@
 % % Replace:
 % % /\\procedure{Départ de \\\1\\ à \2.}/
 
+% Catch Propositions and format those
+% Selector:
+% /% (\w+) (propose .*)\. (\w+)\.?$/
+% Replace:
+% /\\proposition{\\\1\\ \2}{\\\3}/
+
+% Catch Amendments and format those
+% Selector:
+% /% (\w+) (amende .*\.) ?(\w+)\.?$/
+% Replace:
+% \\amendement{\\\1\\ \2}{\\\3}
+
+% Catch Sub-Amendments and format those
+% Selector:
+% /% (\w+) (sous-?amende .*\.) ?(\w+)\.?$/
+% Replace:
+% \\sousamendement{\\\1\\ \2}{\\\3}
+
+% Convert Results Shorthands to Full Latex Code
+% /^% \\?((?:sa|a|p)(?:[ab][mu])a?)/
+% Replace
+% \\resultat{\\\1}
+
+% Catch Calls for votes
+% /% \\?vote ?\{?\\?(\w+)\}?/
+% Replace
+% \\vote{\\\1***}
+
+% Convert point from FEUS to latex notation
+% /C[AM]\s(28.2/1.\d\d?)\s?\t(.*)\s?\t?:?$/
+% replace
+% \\point{\2} % \1
+
+% Convert subpoint from FEUS to latex notation
+% /\t?(1\.\d\d?\.\d)\s?\t(?:\(\w\))*\s?(.*)\s*\t?:?$/
+% replace
+% \\souspoint{\2} % \1
+
+% Convert subsubsubpoint from FEUS to latex notation
+% /\t?(1\.\d\d?\.\d\.\d\d?)\s?\t(?:\(\w\))*\s?(.*)\s*\t?:?$/
+% Altt:
+% /^(?:% )?(1\.\d\d?\.\d\.\d\d?)\s?(?:\(\w+\)\s)*(.*)$/
+% replace
+% \\soussouspoint{\2} % \1
 
 % Capture all discussion entries and format them right (Use after everything else is set)
 % Selector:
